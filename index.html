@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chroma Diaries - Web Magazine</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+ <link rel="icon" type="image/png" sizes="32x32" href="img/white.png">
+<link rel="apple-touch-icon" href="img/white.png">
+    
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container position-relative">
+            <!-- Mobile Navigation Toggle -->
+            <button class="mobile-nav-toggle" id="mobileNavToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Logo - Centered -->
+            <div class="logo-container">
+                <img src="./img/logo.png" alt="Chroma Diaries Logo" class="logo" onclick="showPage('home')">
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" class="form-control" id="searchInput" placeholder="Search writings, authors, tags...">
+                <button type="button" id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <!-- Profile Button -->
+            <div class="profile-dropdown">
+                <button class="profile-btn" id="profileBtn">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="profile-menu" id="profileMenu">
+                    <a href="#" id="loginLink"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="#" id="signupLink"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    <a href="#" id="createWritingLink" class="hidden"><i class="fas fa-pen"></i> Create Writing</a>
+                    <a href="#" id="dashboardLink" class="hidden"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="#" id="logoutLink" class="hidden"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Navigation Bar -->
+<div class="container mt-3">
+    <ul class="nav justify-content-center desktop-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showPage('home')">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showPage('about')">About Us</a>
+        </li>
+        <!-- Categories Dropdown (changed from Article) -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="#" id="articleDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories <i class="fas fa-chevron-down"></i>
+            </a>
+            <div class="dropdown-content" aria-labelledby="articleDropdown">
+                <a class="dropdown-item" href="#" onclick="showCategoryPage('book-review')">Reviews</a>
+                <a class="dropdown-item" href="#" onclick="showCategoryPage('philosophy')">Stories</a>
+                <a class="dropdown-item" href="#" onclick="showCategoryPage('politics')">Poems</a>
+                <a class="dropdown-item" href="#" onclick="showCategoryPage('science-technology')">Translation</a>
+                <a class="dropdown-item" href="#" onclick="showCategoryPage('society-culture')">Features</a>
+                <a class="dropdown-item" href="#" onclick="showCategoryPage('theology')">Letters</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showCategoryPage('shorts')">Diary</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showCategoryPage('translation')">Essays</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showCategoryPage('podcast')">Podcast</a>
+        </li>
+        <!-- Contact Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="#" id="contactDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Contact <i class="fas fa-chevron-down"></i>
+            </a>
+            <div class="dropdown-content" aria-labelledby="contactDropdown">
+                <a class="dropdown-item" href="#" onclick="showPage('contact')">Contact Us</a>
+                <a class="dropdown-item" href="#" id="contributeLink">Contribute</a>
+            </div>
+        </li>
+    </ul>
+    
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav-menu" id="mobileNavMenu">
+        <a class="nav-link" href="#" onclick="showPage('home')">Home</a>
+        <a class="nav-link" href="#" onclick="showPage('about')">About Us</a>
+        
+        <!-- Mobile Categories Dropdown (changed from Article) -->
+        <div class="mobile-dropdown" id="mobileArticleDropdown">
+            <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown('article')">
+                Categories <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="mobile-dropdown-content">
+                <a class="nav-link" href="#" onclick="showCategoryPage('book-review')">Reviews</a>
+                <a class="nav-link" href="#" onclick="showCategoryPage('philosophy')">Stories</a>
+                <a class="nav-link" href="#" onclick="showCategoryPage('politics')">Poems</a>
+                <a class="nav-link" href="#" onclick="showCategoryPage('science-technology')">Translation</a>
+                <a class="nav-link" href="#" onclick="showCategoryPage('society-culture')">Features</a>
+                <a class="nav-link" href="#" onclick="showCategoryPage('theology')">Letters</a>
+            </div>
+        </div>
+        
+        <a class="nav-link" href="#" onclick="showCategoryPage('shorts')">Diary</a>
+        <a class="nav-link" href="#" onclick="showCategoryPage('translation')">Essays</a>
+        <a class="nav-link" href="#" onclick="showCategoryPage('podcast')">Podcast</a>
+        
+        <!-- Mobile Contact Dropdown -->
+        <div class="mobile-dropdown" id="mobileContactDropdown">
+            <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown('contact')">
+                Contact <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="mobile-dropdown-content">
+                <a class="nav-link" href="#" onclick="showPage('contact')">Contact Us</a>
+                <a class="nav-link" href="#" id="mobileContributeLink">Contribute</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <!-- Home Page -->
+        <div id="homePage" class="page-content">
+            <!-- Slideshow Section -->
+            <div class="slideshow" id="slideshow">
+                <!-- Slides will be dynamically loaded here -->
+            </div>
+            
+            <div class="small-slides" id="smallSlides">
+                <!-- Small slides will be dynamically loaded here -->
+            </div>
+            
+            <!-- Recent Writings Section -->
+            <h2 class="mt-5 mb-4">Recent Writings</h2>
+            <div class="row" id="recentWritings">
+                <!-- Article cards will be dynamically loaded here -->
+            </div>
+            <button class="show-more-btn" id="showMoreBtn">Show More</button>
+        </div>
+
+        <!-- About Page -->
+        <div id="aboutPage" class="page-content hidden">
+            <div class="hero-section">
+                <div class="container hero-content">
+                    <center>
+                    <h1 class="hero-title">About Chroma Diaries</h1>
+                    <p class="hero-subtitle">Where Stories Come to Life and Voices Matte
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="about-section">
+                    <h2>Our Story</h2>
+                    <p>ChromaDiaries is an English-language web magazine designed especially for readers under 18. It offers a friendly and creative platform where young learners can explore stories, poems, articles, and ideas written in simple, engaging English.</p>
+                    <p> The magazine encourages children and teens to read regularly, improve their vocabulary, and develop stronger writing and communication skills. By presenting a mix of creative content and thoughtful expression, ChromaDiaries aims to inspire imagination, build confidence, and help young minds grow into better storytellers and confident English users.</p>
+                    <p></p>
+               
+                </div>
+                
+              <div class="about-section">
+    <h2>Our Values</h2>
+
+    <div class="value-card">
+        <h4><i class="fas fa-paint-brush"></i> Creativity</h4>
+        <p>Encouraging young minds to express ideas freely through stories, poems, and art.</p>
+    </div>
+
+    <div class="value-card">
+        <h4><i class="fas fa-book"></i> Learning</h4>
+        <p>Helping under-18 readers improve their English vocabulary, reading habits, and writing skills.</p>
+    </div>
+
+    <div class="value-card">
+        <h4><i class="fas fa-heart"></i> Confidence</h4>
+        <p>Providing a safe platform where children and teens can share their voice without fear.</p>
+    </div>
+
+    <div class="value-card">
+        <h4><i class="fas fa-users"></i> Inclusivity</h4>
+        <p>Welcoming diverse thoughts, backgrounds, and perspectives to create a rich, supportive community.</p>
+    </div>
+</div>
+
+                
+                <div class="about-section">
+                    <h2>Meet Our Team</h2>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <img src="./img/1005.jpg" alt="Team Member">
+                            <h4>Muhammad Sinan MK</h4>
+                            <p>General Manager</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="./img/1022.png" alt="Team Member">
+                            <h4>Naseef Ugrapuram</h4>
+                            <p>Asst.Manager & PRO</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="./img/970.jpg" alt="Team Member">
+                            <h4>Abdul Basit P</h4>
+                            <p>Cheif Editor</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="./img/1037.jpg" alt="Team Member">
+                            <h4>Muhammad Shifin</h4>
+                            <p>Controller</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Page -->
+        <div id="categoryPage" class="page-content hidden">
+            <h2 id="categoryTitle" class="mb-4">Category</h2>
+            <div class="row" id="categoryWritings">
+                <!-- Category articles will be dynamically loaded here -->
+            </div>
+            <button class="show-more-btn" id="categoryShowMoreBtn">Show More</button>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contactPage" class="page-content hidden">
+            <div class="contact-hero">
+                <div class="container">
+                    <h1 class="display-4">Get in Touch</h1>
+                    <p class="lead">We'd love to hear from you! Reach out and let's start a conversation.</p>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="contact-info-grid">
+                    <div class="contact-info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Visit Us</h4>
+                        <p>ChromaDiaries<br>English Webmagazine</p>
+                    </div>
+                    <div class="contact-info-card">
+                        <i class="fas fa-phone"></i>
+                        <h4>Call Us</h4>
+                        <p>+91 8075585732<br></p>
+                    </div>
+                    <div class="contact-info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email Us</h4>
+                        <p>chromadiariesofficial@gmail.com<br>chromadiarieseditors@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h2>Send Us a Message</h2>
+                    <p>Whether you have a question, feedback, or would like to contribute to our magazine, please reach out using the form below.</p>
+                    
+                  <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+    <input type="hidden" name="access_key" value="a6064125-9f16-4e00-8028-6960e2f1e6b2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="contactName" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="contactName" name="name" placeholder="Enter your name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="contactEmail" class="form-label">Your Email</label>
+                                    <input type="email" class="form-control" id="contactEmail" name="email" placeholder="Enter your email" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactSubject" class="form-label">Subject</label>
+                            <input type="text" class="form-control" id="contactSubject" name="subject" placeholder="Enter subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage" class="form-label">Your Message</label>
+                            <textarea class="form-control" id="contactMessage" name="message" rows="6" placeholder="Tell us what's on your mind..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Writing Page -->
+        <div id="createWritingPage" class="page-content hidden">
+            <div class="writing-form dashboard-section">
+                <h2><i class="fas fa-pen"></i> Create Writing</h2>
+                <form id="writingForm">
+                    <div class="form-group">
+                        <label for="writingTitle" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="writingTitle" placeholder="Enter title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="writingDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="writingDescription" rows="3" placeholder="Enter description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="writingImage" class="form-label">Featured Image</label>
+                        <div class="image-upload-container" id="writingImageUpload">
+                            <input type="file" id="writingImageFile" accept="image/*" style="display: none;">
+                            <div id="imageUploadPlaceholder">
+                                <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                                <p class="text-muted">Click to upload image or drag and drop</p>
+                                <p class="text-muted small">PNG, JPG, GIF up to 10MB</p>
+                            </div>
+                            <div class="image-upload-overlay">
+                                <i class="fas fa-camera"></i> Change Image
+                            </div>
+                        </div>
+                        <input type="hidden" id="writingImage" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="writingContent" class="form-label">Content</label>
+                        <div class="editor-toolbar">
+                            <button type="button" class="editor-btn" data-command="bold"><i class="fas fa-bold"></i></button>
+                            <button type="button" class="editor-btn" data-command="italic"><i class="fas fa-italic"></i></button>
+                            <button type="button" class="editor-btn" data-command="underline"><i class="fas fa-underline"></i></button>
+                            <button type="button" class="editor-btn" data-command="strikeThrough"><i class="fas fa-strikethrough"></i></button>
+                            <select class="editor-select" data-command="fontSize">
+                                <option value="">Size</option>
+                                <option value="1">Small</option>
+                                <option value="3">Normal</option>
+                                <option value="5">Large</option>
+                                <option value="7">Huge</option>
+                            </select>
+                            <select class="editor-select" data-command="fontName">
+                                <option value="">Font</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Times New Roman">Times</option>
+                                <option value="Courier New">Courier</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Verdana">Verdana</option>
+                            </select>
+                            <button type="button" class="editor-btn" data-command="justifyLeft"><i class="fas fa-align-left"></i></button>
+                            <button type="button" class="editor-btn" data-command="justifyCenter"><i class="fas fa-align-center"></i></button>
+                            <button type="button" class="editor-btn" data-command="justifyRight"><i class="fas fa-align-right"></i></button>
+                            <button type="button" class="editor-btn" data-command="insertOrderedList"><i class="fas fa-list-ol"></i></button>
+                            <button type="button" class="editor-btn" data-command="insertUnorderedList"><i class="fas fa-list-ul"></i></button>
+                            <button type="button" class="editor-btn" data-command="createLink"><i class="fas fa-link"></i></button>
+                            <button type="button" class="editor-btn" data-command="insertImage"><i class="fas fa-image"></i></button>
+                            <button type="button" class="editor-btn" data-command="removeFormat"><i class="fas fa-eraser"></i></button>
+                        </div>
+                        <div class="editor-content" id="writingContent" contenteditable="true"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="writingTags" class="form-label">Tags</label>
+                        <input type="text" class="form-control" id="writingTags" placeholder="Enter tags separated by commas">
+                    </div>
+              <div class="form-group">
+    <label for="writingCategory" class="form-label">Category</label>
+    <select class="form-control" id="writingCategory" required>
+        <option value="">Select a category</option>
+        <option value="book-review">Reviews</option>
+        <option value="philosophy">Stories</option>
+        <option value="politics">Poems</option>
+        <option value="science-technology">Translation</option>
+        <option value="society-culture">Features</option>
+        <option value="theology">Letters</option>
+        <option value="shorts">Diary</option>
+        <option value="translation">Essays</option>
+        <option value="podcast">Podcast</option>
+    </select>
+</div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Submit Writing
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Dashboard Page - IMPROVED -->
+        <div id="dashboardPage" class="page-content hidden">
+          
+            <!-- Profile Section -->
+            <div class="dashboard-section">
+                <h3><i class="fas fa-user-circle"></i> Profile Details</h3>
+                <div class="profile-pic-container">
+                    <img src="image" alt="Profile Picture" class="profile-pic" id="profilePic">
+                    <button class="profile-upload-btn" id="profileUploadBtn">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                    <input type="file" id="profilePicFile" accept="image/*" style="display: none;">
+                </div>
+                <form id="profileForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="profileFirstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="profileFirstName" placeholder="Enter first name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="profileSurname" class="form-label">Surname</label>
+                                <input type="text" class="form-control" id="profileSurname" placeholder="Enter surname">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="profileEmail" placeholder="Enter email" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="profilePhone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="profilePhone" placeholder="Enter phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileInstitution" class="form-label">Institution/School</label>
+                        <input type="text" class="form-control" id="profileInstitution" placeholder="Enter your institution or school">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileBio" class="form-label">Bio</label>
+                        <textarea class="form-control" id="profileBio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileWebsite" class="form-label">Website</label>
+                        <input type="url" class="form-control" id="profileWebsite" placeholder="https://yourwebsite.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileLocation" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="profileLocation" placeholder="City, Country">
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Update Profile
+                    </button>
+                </form>
+            </div>
+            
+            <!-- My Writings Section -->
+          
+        </div>
+        
+<!-- Replace the existing authorDashboardPage div with this -->
+    <div id="authorDashboardPage" class="page-content hidden">
+        <div class="author-dashboard dashboard-section">
+            <!-- In the authorDashboardPage div -->
+    <div class="author-header">
+        <img src="image" alt="Author" class="author-pic" id="authorPic">
+    
+    <div class="author-info-container">
+        <div>
+            <h2 id="authorName">Author Name</h2>
+            <p class="author-bio" id="authorBio">Author bio goes here...</p>
+            <div class="author-details" id="authorDetails">
+                <p><i class="fas fa-envelope"></i> <span id="authorEmail">email@example.com</span></p>
+                <p><i class="fas fa-phone"></i> <span id="authorPhone">Not provided</span></p>
+                <p><i class="fas fa-school"></i> <span id="authorInstitution">Not provided</span></p>
+                <p><i class="fas fa-globe"></i> <span id="authorWebsite">Not provided</span></p>
+                <p><i class="fas fa-map-marker-alt"></i> <span id="authorLocation">Not provided</span></p>
+            </div>
+            <div class="author-dashboard-link" id="authorDashboardLink" style="display: none;">
+                <a href="#" onclick="showPage('dashboard')" class="btn btn-outline-primary">
+                    <i class="fas fa-tachometer-alt"></i> My Dashboard
+                </a>
+            </div>
+        </div>
+        <div class="author-follow-section">
+            <div class="follower-count">
+                <i class="fas fa-users"></i> <span id="followerCount">0</span> Followers
+            </div>
+            <button class="follow-btn" id="authorFollowBtn">
+                <i class="fas fa-user-plus"></i> Follow
+            </button>
+        </div>
+    </div>
+    </div>
+            
+            <h3>Published Writings</h3>
+            <div id="authorWritings">
+                <!-- Author's writings will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+        <!-- Article Page -->
+        <div id="articlePage" class="page-content hidden">
+            <div class="article-page">
+                <div class="article-header">
+                    <h1 class="article-title" id="articleTitle">Article Title</h1>
+                    <div class="article-meta-info">
+                   <!-- Find this section in viewWriting function in index.js -->
+
+<!-- In the article page - replace the existing article-author-info div -->
+<div class="article-author-info">
+    <div class="profile-column">
+        <img src="image" alt="Author" class="article-author-avatar" id="articleAuthorAvatar">
+    </div>
+    <div class="author-details-column">
+        <div id="articleAuthor" class="clickable-author">Author Name</div>
+        <div id="articleBio" class="author-bio-small">Author bio goes here...</div>
+        <div id="articleInstitution" class="author-institution-small">Institution</div>
+        <div id="articleDate">Publication Date</div>
+    </div>
+    <div class="follow-column">
+        <div class="article-follow-section">
+            <div class="follower-count-small">
+                <i class="fas fa-users"></i> <span id="articleFollowerCount">0</span> Followers
+            </div>
+            <button class="follow-btn-small" id="articleFollowBtn">
+                <i class="fas fa-user-plus"></i> Follow
+            </button>
+        </div>
+    </div>
+</div>
+                        <div class="article-category" id="articleCategory">Category</div>
+                    </div>
+                </div>
+                
+                <img src="image" alt="Article Image" class="article-image" id="articleImage">
+                
+                <div class="article-content" id="articleContent">
+                    <!-- Article content will be displayed here -->
+                </div>
+                
+                <!-- Likes Section -->
+                <div class="engagement-section">
+                    <div class="engagement-buttons">
+                        <button class="engagement-btn" id="likeBtn">
+                            <i class="fas fa-heart"></i>
+                            <span id="likeCount">0</span> Likes
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="article-tags" id="articleTags">
+                    <!-- Article tags will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        
+
+        <!-- Search Results Page -->
+        <div id="searchResultsPage" class="page-content hidden">
+            <div class="search-results">
+                <h2>Search Results</h2>
+                <div class="search-info" id="searchInfo">
+                    <!-- Search information will be displayed here -->
+                </div>
+                <div class="row" id="searchResultsContainer">
+                    <!-- Search results will be displayed here -->
+                </div>
+                <button class="show-more-btn" id="searchShowMoreBtn">Show More</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-widget">
+                        <h4>About Chroma Diaries</h4>
+                        <p>ChromaDiaries is an English web magazine for under-18 readers, helping them improve language skills through stories, poems, and creative expression.</p>
+                        <div class="social-icons mt-3">
+                            <a href="https://www.facebook.com/profile.php?id=61583228204706"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://x.com/chroma_diaries"><i class="fab fa-twitter"></i></i></a>
+                            <a href="https://www.instagram.com/chroma.diaries/"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/@ChromaDiariesWebMagazine"><i class="fab fa-youtube"></i></a><br>
+                        </div>
+                    </div>
+                </div>
+             <div class="col-md-4">
+    <div class="footer-widget">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('about')">About Us</a></li>
+            <li><a href="#" onclick="showCategoryPage('book-review')">Reviews</a></li>
+            <li><a href="#" onclick="showCategoryPage('philosophy')">Stories</a></li>
+            <li><a href="#" onclick="showCategoryPage('politics')">Poems</a></li>
+            <li><a href="#" onclick="showCategoryPage('science-technology')">Translation</a></li>
+            <li><a href="#" onclick="showCategoryPage('society-culture')">Features</a></li>
+            <li><a href="#" onclick="showCategoryPage('theology')">Letters</a></li>
+            <li><a href="#" onclick="showCategoryPage('shorts')">Diary</a></li>
+            <li><a href="#" onclick="showCategoryPage('translation')">Essays</a></li>
+            <li><a href="#" onclick="showCategoryPage('podcast')">Podcast</a></li>
+            <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
+        </ul>
+    </div>
+</div>
+                <div class="col-md-4">
+                    <div class="footer-widget">
+                        <h4>Contact Info</h4>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-map-marker-alt"></i> Sabeelul Hidaya Islamic College, Vadeehidaya, Parappur, Kottakkal, Malappuram, 676503 </li>
+                            <li><i class="fas fa-phone"></i> +91 8075585732</li>
+                            <li><i class="fas fa-envelope"></i> chromadiariesofficial@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Chroma Diaries. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+ <!-- Login Modal - Updated -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content login-modal-content">
+            <div class="login-modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Welcome Back</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    
+                </button>
+            </div>
+            <div class="login-modal-body">
+                <div class="login-container">
+                    <div class="login-form-container">
+                        <form id="loginForm">
+                            <div class="form-group mb-4">
+                                <label for="loginEmail" class="form-label">Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="loginPassword" class="form-label">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                        </form>
+                        
+                        <div class="login-divider">
+                            <span>OR</span>
+                        </div>
+                        
+                        <div class="social-login">
+                            <button type="button" class="btn btn-google" id="googleLoginBtn">
+                                <i class="fab fa-google"></i> Continue with Google
+                            </button>
+                            <button type="button" class="btn btn-facebook" id="facebookLoginBtn">
+                                <i class="fab fa-facebook-f"></i> Continue with Facebook
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="login-modal-footer">
+                <p>Don't have an account? <a href="#" id="signupFromLogin">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sign Up Modal - Updated -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content signup-modal-content">
+            <div class="signup-modal-header">
+                <h5 class="modal-title" id="signupModalLabel">Create Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                
+                </button>
+            </div>
+            <div class="signup-modal-body">
+                <div class="signup-container">
+                    <div class="signup-form-container">
+                        <form id="signupForm">
+                            <div class="text-center mb-4">
+                                <div class="profile-pic-container">
+                                    <img src="image" alt="Profile Picture" class="profile-pic" id="signupProfilePic">
+                                    <button class="profile-upload-btn" type="button" id="signupProfileUploadBtn">
+                                        <i class="fas fa-camera"></i>
+                                    </button>
+                                    <input type="file" id="signupProfilePicFile" accept="image/*" style="display: none;">
+                                </div>
+                                <p class="text-muted">Upload your profile picture</p>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="signupFirstName" class="form-label">First Name</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            <input type="text" class="form-control" id="signupFirstName" placeholder="Enter your first name" required><br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="signupSurname" class="form-label">Surname</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            <input type="text" class="form-control" id="signupSurname" placeholder="Enter your surname" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupEmail" class="form-label">Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email" required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupPhone" class="form-label">Phone Number</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    <input type="tel" class="form-control" id="signupPhone" placeholder="Enter your phone number" required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupInstitution" class="form-label">Institution/School</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-school"></i></span>
+                                    <input type="text" class="form-control" id="signupInstitution" placeholder="Enter your institution or school">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupBio" class="form-label">Bio</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-info-circle"></i></span>
+                                    <textarea class="form-control" id="signupBio" rows="3" placeholder="Tell us about yourself..."></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupWebsite" class="form-label">Website</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                                    <input type="url" class="form-control" id="signupWebsite" placeholder="https://yourwebsite.com">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupLocation" class="form-label">Location</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                    <input type="text" class="form-control" id="signupLocation" placeholder="City, Country">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupDOB" class="form-label">Date of Birth</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                    <input type="date" class="form-control" id="signupDOB" required>
+                                </div>
+                                <small class="form-text text-muted">You must be under 18 years old to create an account</small>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="signupPassword" class="form-label">Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                            <input type="password" class="form-control" id="signupPassword" placeholder="Enter password" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                            <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm password" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Create Account</button>
+                        </form>
+                        
+                        <div class="signup-divider">
+                            <span>OR</span>
+                        </div>
+                        
+                        <div class="social-login">
+                            <button type="button" class="btn btn-google" id="googleSignupBtn">
+                                <i class="fab fa-google"></i> Sign up with Google
+                            </button>
+                            <button type="button" class="btn btn-facebook" id="facebookSignupBtn">
+                                <i class="fab fa-facebook-f"></i> Sign up with Facebook
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="signup-modal-footer">
+                <p>Already have an account? <a href="#" id="loginFromSignup">Sign in</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+   <!-- Sign Up Modal - Updated -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content signup-modal-content">
+            <div class="signup-modal-header">
+                <h5 class="modal-title" id="signupModalLabel">Create Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="signup-modal-body">
+                <div class="signup-container">
+                    <div class="signup-form-container">
+                        <form id="signupForm">
+                            <div class="text-center mb-4">
+                                <div class="profile-pic-container">
+                                    <img src="image" alt="Profile Picture" class="profile-pic" id="signupProfilePic">
+                                    <button class="profile-upload-btn" type="button" id="signupProfileUploadBtn">
+                                        <i class="fas fa-camera"></i>
+                                    </button>
+                                    <input type="file" id="signupProfilePicFile" accept="image/*" style="display: none;">
+                                </div>
+                                <p class="text-muted">Upload your profile picture</p>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="signupFirstName" class="form-label">First Name</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            <input type="text" class="form-control" id="signupFirstName" placeholder="Enter your first name" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="signupSurname" class="form-label">Surname</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            <input type="text" class="form-control" id="signupSurname" placeholder="Enter your surname" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupEmail" class="form-label">Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email" required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupPhone" class="form-label">Phone Number</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    <input type="tel" class="form-control" id="signupPhone" placeholder="Enter your phone number" required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupInstitution" class="form-label">Institution/School</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-school"></i></span>
+                                    <input type="text" class="form-control" id="signupInstitution" placeholder="Enter your institution or school">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupBio" class="form-label">Bio</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-info-circle"></i></span>
+                                    <textarea class="form-control" id="signupBio" rows="3" placeholder="Tell us about yourself..."></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupWebsite" class="form-label">Website</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                                    <input type="url" class="form-control" id="signupWebsite" placeholder="https://yourwebsite.com">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupLocation" class="form-label">Location</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                    <input type="text" class="form-control" id="signupLocation" placeholder="City, Country">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="signupDOB" class="form-label">Date of Birth</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                    <input type="date" class="form-control" id="signupDOB" required>
+                                </div>
+                                <small class="form-text text-muted">You must be under 18 years old to create an account</small>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="signupPassword" class="form-label">Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                            <input type="password" class="form-control" id="signupPassword" placeholder="Enter password" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                            <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm password" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Create Account</button>
+                        </form>
+                        
+                        <div class="signup-divider">
+                            <span>OR</span>
+                        </div>
+                        
+                        <div class="social-login">
+                            <button type="button" class="btn btn-google" id="googleSignupBtn">
+                                <i class="fab fa-google"></i> Sign up with Google
+                            </button>
+                            <button type="button" class="btn btn-facebook" id="facebookSignupBtn">
+                                <i class="fab fa-facebook-f"></i> Sign up with Facebook
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="signup-modal-footer">
+                <p>Already have an account? <a href="#" id="loginFromSignup">Sign in</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="successMessage">Operation completed successfully!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="module">
+  // Import Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+  import { 
+      getAuth, 
+      signInWithPopup, 
+      GoogleAuthProvider, 
+      FacebookAuthProvider 
+  } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+
+  // Your Firebase Config
+  const firebaseConfig = {
+      apiKey: "AIzaSyBRuZdeaUSI3pu3-YdPlMSgApxwO3GknOQ",
+      authDomain: "chromadiaries-d7f14.firebaseapp.com",
+      databaseURL: "https://chromadiaries-d7f14-default-rtdb.firebaseio.com",
+      projectId: "chromadiaries-d7f14",
+      storageBucket: "chromadiaries-d7f14.firebasestorage.app",
+      messagingSenderId: "637524482274",
+      appId: "1:637524482274:web:603eb6026f810b59efe6bb",
+      measurementId: "G-YQPQ8W2DTQ"
+  };
+
+  // Initialize App
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Providers
+  const googleProvider = new GoogleAuthProvider();
+  const facebookProvider = new FacebookAuthProvider();
+
+  //--------------------------------------
+  // GOOGLE LOGIN
+  //--------------------------------------
+  document.getElementById("googleLoginBtn").addEventListener("click", () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        console.log("Google Login:", result.user);
+        alert("Logged in with Google!");
+      })
+      .catch((error) => console.error("Google Login Error:", error));
+  });
+
+  //--------------------------------------
+  // GOOGLE SIGNUP (same as login)
+  //--------------------------------------
+  document.getElementById("googleSignupBtn").addEventListener("click", () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        console.log("Google Signup:", result.user);
+        alert("Signed up with Google!");
+      })
+      .catch((error) => console.error("Google Signup Error:", error));
+  });
+
+  //--------------------------------------
+  // FACEBOOK LOGIN
+  //--------------------------------------
+  document.getElementById("facebookLoginBtn").addEventListener("click", () => {
+    signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        console.log("Facebook Login:", result.user);
+        alert("Logged in with Facebook!");
+      })
+      .catch((error) => console.error("Facebook Login Error:", error));
+  });
+
+  //--------------------------------------
+  // FACEBOOK SIGNUP
+  //--------------------------------------
+  document.getElementById("facebookSignupBtn").addEventListener("click", () => {
+    signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        console.log("Facebook Signup:", result.user);
+        alert("Signed up with Facebook!");
+      })
+      .catch((error) => console.error("Facebook Signup Error:", error));
+  });
+
+</script>
+
+<script type="module">
+  // (Firebase setup from above is here)
+
+  // GOOGLE LOGIN
+  document.getElementById("googleLoginBtn").addEventListener("click", function () {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        console.log("Logged in:", result.user);
+        alert("Google Login Successful!");
+      })
+      .catch((error) => console.error(error));
+  });
+
+  // GOOGLE SIGNUP (same function)
+  document.getElementById("googleSignupBtn").addEventListener("click", function () {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        console.log("Signed up:", result.user);
+        alert("Google Signup Successful!");
+      })
+      .catch((error) => console.error(error));
+  });
+</script>
+
+<script type="module">
+  // (Firebase setup from above is here)
+
+  // FACEBOOK LOGIN
+  document.getElementById("facebookLoginBtn").addEventListener("click", function () {
+    signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        console.log("Logged in:", result.user);
+        alert("Facebook Login Successful!");
+      })
+      .catch((error) => console.error(error));
+  });
+
+  // FACEBOOK SIGNUP
+  document.getElementById("facebookSignupBtn").addEventListener("click", function () {
+    signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        console.log("Signed up:", result.user);
+        alert("Facebook Signup Successful!");
+      })
+      .catch((error) => console.error(error));
+  });
+</script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
